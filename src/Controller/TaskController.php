@@ -22,15 +22,51 @@ class TaskController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        // creates a task object and initializes some data for this example
-        $task = new Task();
-        $task->setTask('Write a blog post');
-        $task->setDueDate(new \DateTime('tomorrow'));
 
-        $form = $this->createForm(TaskType::class, $task);
+        //just setup a fresh $task object (remove the example data)
+        $task = new Task();
+
+        //use some PHP logic to decide if this form field is required or not
+        $dueDateIsRequired =  true;
+
+        $form = $this->createForm(TaskType::class, $task, [
+            'action' => $this->generateUrl('app_task_new'),
+            'method' => 'POST',
+            'require_due_date' => $dueDateIsRequired,
+        ]);
+
+        $form = $this->get('form.factory')->createNamed('my_name', TaskType::class, $task);
+
+
+        $form->handleRequest($request);
+        if($request->isMethod('POST'))
+        {
+            //$form->submit($request->request->get($form->getName()));
+            if ($form->isSubmitted() && $form->isValid())
+            {
+                $task = $form->getData();
+
+                //.. perform some action, such as saving the task to the database
+                // for example is Task is a Doctrine Entity, save it
+                 $entityManager = $this->getDoctrine()->getManager();
+                 $entityManager->persist($task);
+                 $entityManager->flush();
+
+                return $this->redirectToRoute(('task_success'));
+            }
+        }
+
 
         return $this->render('task/new.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/task_success", name="task_success")
+     */
+    public function taskSuccess()
+    {
+        return $this->render('task/success.html.twig');
     }
 }

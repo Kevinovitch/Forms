@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Nouvelle commande{% endblock %}
+
+{%  form_theme form _self %}
+
+{%  use 'form/my_theme.html.twig' with postal_address_row as base_postal_address_row %}
+
+{% block postal_address_row %}
+    <div class="some-custom-class">
+        {{ block('base_postal_address_row') }}
+    </div>
+{%  endblock %}
+
+{% block body %}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}

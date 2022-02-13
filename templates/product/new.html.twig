@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adding a new product{% endblock %}
+
+{% block body %}
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.brochureFilename) }}
+    {{ form_row(form.save) }}
+
+{{ form_end(form) }}
+
+{% endblock %}

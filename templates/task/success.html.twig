@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Tache créée{% endblock %}
+
+{% block body %}
+
+
+        <h3>La création de la tâche s'est déroulée avec succès</h3>
+
+    <a href="{{ path('app_task_new') }}">Créer une nouvelle tâche</a>
+    {#    <div class="task">#}
+    {#        {{ form_row(form.task) }}#}
+    {#    </div>#}
+
+    {#    <h3>Due Date</h3>#}
+    {#    <div class="dueDate">#}
+    {#        {{ form_row(form.dueDate) }}#}
+    {#    </div>#}
+
+    {#    <h3>Category</h3>#}
+    {#    <div class="category">#}
+    {#        {{ form_row(form.category) }}#}
+    {#    </div>#}
+
+
+    {#    {{ form_rest(form) }}#}
+
+
+{% endblock %}

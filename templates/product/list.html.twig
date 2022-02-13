@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product list{% endblock %}
+
+{% block body %}
+
+    {% for product in products %}
+
+        <div>
+            <p>{{ product.name }}</p>
+            <p>{{ product.price }}</p>
+            <p>{{ product.brochureFilename }}</p>
+
+            <a href="{{ asset('uploads/brochures/' ~ product.brochureFilename) }}">View brochure (PDF)</a>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
